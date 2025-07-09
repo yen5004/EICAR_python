@@ -3,8 +3,8 @@ Breakdown of the EICAR Test Variants
 
 🧱 1. Basic Python Dropper
 ``` python
-EICAR_STRING = "X5O!...$H+H*"
-with open("eicar.com", "w") as f:
+EICAR_STRING = "X5O!P%@AP[4\\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*"
+with open("eicar_basic_dropper.txt", "w") as f:
     f.write(EICAR_STRING)
 ```
 
