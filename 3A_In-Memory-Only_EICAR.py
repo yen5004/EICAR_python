@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # In-Memory-Only EICAR Execution
 # This simulates malware that operates only in memory — no file drop — by writing the EICAR string into a BytesIO or subprocess without saving it.
 
