@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Memory-based AV test using PowerShell injection (advanced). 
 # Use Python to spawn a PowerShell command that generates the EICAR string in memory. This more closely mimics malware droppers used in red teaming.
 # This variant avoids writing to disk. AV/EDR with script and memory inspection will often catch it.
