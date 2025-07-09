@@ -38,10 +38,14 @@ Encode it to Base64:
 echo -n 'import base64; e=base64.b64decode("WDVPKVB%QVBbNFxQWlg1NChQXildN0NDKTd9JEVJQ0FSLVNUQU5EQVItQU5USVZJUlVTLVRFU1QtRklMRSFKSEor"); open("eicar_from_macro.com","w").write(e.decode())' | base64
 ```
 
-**Sample Output** (shortened):
+**Output**:
 
 ```
-aW1wb3J0IGJhc2U2NDsgZT1iYXNlNjQuY...
+aW1wb3J0IGJhc2U2NDsgZT1iYXNlNjQuYjY0ZGVjb2RlKCJXRFZQS1ZCJVFWQmJORnhRV2xnMU5D
+aFFYaWxkTjBOREtUZDlKRVZKUTBGU0xWTlVRVTVFUVZJdFFVNVVTVlpKVWxWVExWUkZVMVF0Umts
+TVJTRktTRW9yIik7IG9wZW4oImVpY2FyX2Zyb21fbWFjcm8uY29tIiwidyIpLndyaXRlKGUuZGVj
+b2RlKCkp
+
 ```
 
 ---
