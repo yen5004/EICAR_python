@@ -14,20 +14,7 @@ with open("eicar_basic_dropper.txt", "w") as f:
 
 ---
 
-🧅 2. Obfuscated Dropper
-``` python
-encoded = "Base64_EICAR_String"
-decoded = base64.b64decode(encoded).decode('ascii')
-with open("eicar_obf.com", "w") as f:
-    f.write(decoded)
-```
-- What it does: Hides the EICAR string in Base64, decodes it at runtime.
-- Purpose: Simulates basic payload encoding like malware often uses.
-- Detection chance: Lower unless AV/EDR inspects script behavior.
-
----
-
-1_In-Memory_EICAR.py
+2. In-Memory_EICAR.py
 ``` python
 #!/usr/bin/env python3
 
@@ -56,33 +43,6 @@ print("In-memory EICAR data loaded:", data.decode())
 - Only manipulates EICAR entirely in memory
 - Final result is printed to stdout
 
-✅ Will This Trigger Antivirus?
-| Detection Mechanism | Will It Trigger? | Explanation |
-|---------------------|------------------|-------------|
-| File-based scanning | ❌ No | Nothing is written to disk, so classic AV scanners don’t see a file to scan. |
-| Memory scanning |	⚠️ Rarely | Only some advanced AV/EDR tools scan Python process memory for known signatures like EICAR. |
-| String detection | ❌ No	| The string is printed to stdout, which most AVs do not monitor in real-time. |
-| Behavioral detection |⚠️ Very unlikely | Only the most aggressive EDR solutions might flag the presence of the EICAR string in memory or logs. |
-
-📈 How might it trigger AV?
-While most off-the-shelf AVs will ignore this script, a few scenarios could trigger detection in enterprise environments:
-
-🟡 Possible Triggers:
-| Scenario | Risk | Explanation |
-|----------|------|-------------|
-| Advanced EDR memory scan | Medium–Low | Some EDRs (like CrowdStrike, Defender ATP, etc.) inspect user-space memory and command-line args. |
-| Centralized log monitoring | Low | If stdout is logged to SIEMs and string matching is done post-log, it might be flagged. |
-| Correlated behavior | Very Low | If this is run alongside other suspicious behavior, EDR may correlate and raise suspicion. |
-
-```markdown
-
-🛡️ AV Detection Likelihood by Tool Type
-Tool Type	Detection Likelihood	Notes
-Free AV (Defender, Avast)	❌ Very unlikely	Will not detect this unless the string is written to disk.
-Paid AV Suites	❌ Unlikely	May log the string in telemetry but won’t trigger alerts.
-EDR/XDR (CrowdStrike, SentinelOne, Defender for Endpoint)	⚠️ Low–Medium	Detection is possible via memory inspection, telemetry analysis, or behavior modeling.
-Sandbox AV	⚠️ Low	May log string use, but without a file drop or shell activity, usually not flagged.
-
 🔐 Security Summary
 Risk Category	Status
 Malicious behavior	❌ None (no system changes, no persistence, no network)
@@ -95,17 +55,27 @@ Detection likelihood	⚠️ Low (unless monitored memory or stdout logging)
 ❌	Most antivirus solutions will not detect this script.
 ⚠️	Enterprise EDRs might detect it if they scan memory or correlate stdout logs.
 ✅	Writing the EICAR string to a file or subprocess is almost guaranteed to trigger AV.
+
+---
+
+🧅 3. Obfuscated Dropper
+``` python
+encoded = "Base64_EICAR_String"
+decoded = base64.b64decode(encoded).decode('ascii')
+with open("eicar_obf.com", "w") as f:
+    f.write(decoded)
 ```
+- What it does: Hides the EICAR string in Base64, decodes it at runtime.
+- Purpose: Simulates basic payload encoding like malware often uses.
+- Detection chance: Lower unless AV/EDR inspects script behavior.
 
+---
 
-
-
-
-🧠 3. In-Memory Execution
-A. subprocess with echo
+🧠 4. In-Memory Execution
+Subprocess with echo
 ``` python
 cmd = f'echo {eicar}'
-subprocess.run(cmd, shell=True)
+subprocess.run(["echo", eicar])
 ```
 - What it does: Uses system shell to echo the EICAR string.
 - Purpose: Mimics droppers that execute payloads in memory or with LOLBins (Living Off the Land Binaries).
@@ -113,7 +83,7 @@ subprocess.run(cmd, shell=True)
 
  ---
 
-B. tempfile with auto-deletion 
+5. Tempfile_EICAR with auto-deletion 
 ``` python
 with tempfile.NamedTemporaryFile(...) as tmp:
     tmp.write(eicar.encode())
@@ -125,7 +95,7 @@ os.remove(tmp.name)
 
 ---
 
-C. PowerShell Injection
+6. PowerShell_Injection_EICARS
 ``` python
 powershell_cmd = '$e="..."; [System.Text.Encoding]::ASCII.GetBytes($e) | Out-Null'
 subprocess.run(["powershell", "-Command", powershell_cmd])
@@ -136,7 +106,7 @@ subprocess.run(["powershell", "-Command", powershell_cmd])
 
 ---
 
-🪤 1. Excel VBA Macro → Python Dropper
+🪤 7. Excel VBA Macro → Python Dropper
 - This simulates phishing or initial access where:
 - A malicious Excel document has a macro (VBA script).
 - The macro launches Python to execute a payload (e.g., an EICAR dropper).
@@ -156,7 +126,7 @@ End Sub
 
 ---
 
-📦 2. Embedded Python Payload
+📦 8. Embedded Python Payload
 Here’s what the payload might do before it’s base64-encoded:
 ``` python
 import base64
