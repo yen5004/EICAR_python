@@ -1,5 +1,14 @@
 Breakdown of the EICAR Test Variants
 
+0. Flat_Out_EICARS
+```python
+X5O!P%@AP[4\\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
+```
+- What it does: EICAR test string with python extension.
+- Purpose: Static AV signature test.
+- Detection chance: 100% if AV is active.
+
+---
 
 🧱 1. Basic Python Dropper
 ``` python
@@ -8,7 +17,7 @@ with open("eicar_basic_dropper.txt", "w") as f:
     f.write(EICAR_STRING)
 ```
 
-- What it does: Writes the known EICAR test string to disk (eicar.com).
+- What it does: Writes the known EICAR test string to disk (eicar_basic.dropper.txt).
 - Purpose: Static AV signature test.
 - Detection chance: 100% if AV is active.
 
