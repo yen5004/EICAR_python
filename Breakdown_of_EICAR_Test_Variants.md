@@ -52,18 +52,19 @@ print("In-memory EICAR data loaded:", data.decode())
 - Only manipulates EICAR entirely in memory
 - Final result is printed to stdout
 
-🔐 Security Summary
-Risk Category	Status
-Malicious behavior	❌ None (no system changes, no persistence, no network)
-Malicious payload	✅ EICAR (benign but signature known)
-Evasion technique	✅ Yes (runs purely in-memory)
-Detection likelihood	⚠️ Low (unless monitored memory or stdout logging)
+🔐 *Security Summary*
+|Risk Category | Status |
+|--------------|--------|
+|Malicious behavior |	❌ None (no system changes, no persistence, no network) |
+|Malicious payload |	✅ EICAR (benign but signature known) |
+|Evasion technique |	✅ Yes (runs purely in-memory) |
+|Detection likelihood |	⚠️ Low (unless monitored memory or stdout logging) |
 
-✅ TL;DR – Will It Be Detected?
-✅/❌	Summary
-❌	Most antivirus solutions will not detect this script.
-⚠️	Enterprise EDRs might detect it if they scan memory or correlate stdout logs.
-✅	Writing the EICAR string to a file or subprocess is almost guaranteed to trigger AV.
+✅ *TL;DR – Will It Be Detected?*
+|-------------------------------------------------------- |
+| ❌	Most antivirus solutions will not detect this script. |
+| ⚠️	Enterprise EDRs might detect it if they scan memory or correlate stdout logs. |
+| ✅	Writing the EICAR string to a file or subprocess is almost guaranteed to trigger AV. |
 
 ---
 
@@ -71,7 +72,7 @@ Detection likelihood	⚠️ Low (unless monitored memory or stdout logging)
 ``` python
 encoded = "Base64_EICAR_String"
 decoded = base64.b64decode(encoded).decode('ascii')
-with open("eicar_obf.com", "w") as f:
+with open("eicar_obf.txt", "w") as f:
     f.write(decoded)
 ```
 - What it does: Hides the EICAR string in Base64, decodes it at runtime.
